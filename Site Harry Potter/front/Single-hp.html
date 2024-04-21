@@ -1,0 +1,37 @@
+<html lang="en">
+<head>
+    
+<body>
+
+    <h1>Character</h1>
+    <div id="character"></div>
+
+    <script>
+        function fetchCharacter(){
+            let url = window.location.search
+            let slug = new URLSearchParams(url).get('slug')
+            return fetch('https://hp-api.lainocs.fr/characters/' + slug)
+                .then((response)=> response.json())
+        }
+
+        async function displayCharacter(){
+            const data = await fetchCharacter()
+            document.querySelector('#character').innerHTML = `
+                <h1>${data.name}</h1>
+                <img src="${data.image}" alt="${data.name}">
+                <p>${data.house}</p>
+                <p>${data.actor}</p>    
+                <a href="hp.html">Back</a>
+            `
+        }
+
+        displayCharacter()  
+</script>
+</body> 
+    <footer>
+        <p>@2024 Harry Potter Trading Cards Game</p>
+    </footer>
+</head>
+
+
+</html>
